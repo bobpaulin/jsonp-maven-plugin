@@ -25,13 +25,16 @@ import org.apache.maven.plugins.annotations.Parameter;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 
 import javax.json.Json;
+import javax.json.JsonArray;
 import javax.json.JsonMergePatch;
+import javax.json.JsonObject;
+import javax.json.JsonPatch;
 import javax.json.JsonReader;
-import javax.json.JsonValue;
 import javax.json.JsonWriter;
 
 /**
@@ -45,8 +48,11 @@ public class JsonpMojo
     @Parameter(property = "sourceFile", required = true)
     private File sourceFile;
     
-    @Parameter(property = "patchFile", required = true)
+    @Parameter(property = "patchFile", required = false)
     private File patchFile;
+    
+    @Parameter(property = "overrideSourceFile", required = false)
+    private File overrideSourceFile;
     /**
      * Location of the file.
      */
@@ -56,21 +62,50 @@ public class JsonpMojo
     public void execute()
         throws MojoExecutionException
     {
+        JsonReader sourceReader = null;
         JsonReader patchReader = null;
-        JsonReader swaggerReader = null;
+        JsonReader overrideSource = null;
+        JsonObject mergedJson = null;
+        
         try {
-            patchReader = Json.createReader(new FileInputStream(this.patchFile));
-            swaggerReader = Json.createReader(new FileInputStream(this.sourceFile));
+            sourceReader = Json.createReader(new FileInputStream(this.sourceFile));
         } 
         catch (IOException e)
         {
-            throw new MojoExecutionException("Can't find patch or source file");
+            throw new MojoExecutionException("Can't find source file");
         }
-        JsonValue patch = patchReader.readValue();
+        if(patchFile != null)
+        {
+            try {
+                patchReader = Json.createReader(new FileInputStream(this.patchFile));
+                JsonArray patchArray = patchReader.readArray();
+                
+                JsonPatch jsonPatch = Json.createPatch(patchArray);
+                
+                mergedJson = jsonPatch.apply(sourceReader.readObject());
+            } catch (FileNotFoundException e) {
+                throw new MojoExecutionException("Can't find patch file");
+            }
+            
+        }
+        else if(this.overrideSourceFile != null)
+        {
+            try {
+                overrideSource = Json.createReader(new FileInputStream(this.overrideSourceFile));
+                JsonObject patch = overrideSource.readObject();
+                
+                JsonMergePatch mergePatch = Json.createMergePatch(patch);
+                
+                mergedJson = mergePatch.apply(sourceReader.readObject()).asJsonObject();
+            } catch (FileNotFoundException e) {
+                throw new MojoExecutionException("Can't find override file");
+            }
+        }
+        else
+        {
+            throw new MojoExecutionException("Need to provide a patch or override file");
+        }
         
-        JsonMergePatch mergePatch = Json.createMergePatch(patch);
-        
-        JsonValue mergedJson = mergePatch.apply(swaggerReader.readValue());
         
         
         try {
