@@ -20,7 +20,7 @@
   -->
   <groupId>com.bobpaulin.maven.jsonp</groupId>
   <artifactId>jsonp-maven-plugin</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>0.0.1</version>
   <packaging>maven-plugin</packaging>
 
   <name>jsonp-maven-plugin Maven Plugin</name>
