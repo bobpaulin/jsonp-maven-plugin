@@ -84,6 +84,7 @@ The plugin configuration required will look like this:
 ```
   <build>
     <plugins>
+    ...
       <plugin>
         <groupId>com.bobpaulin.maven.jsonp</groupId>
         <artifactId>jsonp-maven-plugin</artifactId>
@@ -103,6 +104,7 @@ The plugin configuration required will look like this:
           </execution>
         </executions>
       </plugin>
+      ...
     </plugins>
   </build>
 ```
