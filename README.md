@@ -1,9 +1,9 @@
 # jsonp-maven-plugin
 A maven plugin for applying patches to json resources
 
-##Usage
+## Usage
 
-###Override
+### Override
 
 An override will overlay one JSON file over another.  It will append new fields and overwrite existing ones. 
 
@@ -55,7 +55,7 @@ The plugin configuration required will look like this
   </build>
 ```
 
-###Patch
+### Patch
 
 A patch uses a JSON Pointer to replace a specific section of a source json document.
 
