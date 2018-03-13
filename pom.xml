@@ -16,6 +16,8 @@
   <packaging>maven-plugin</packaging>
 
   <name>jsonp-maven-plugin Maven Plugin</name>
+  
+  <url>https://github.com/bobpaulin/jsonp-maven-plugin</url>
 
   <description>A Maven plugin for merging JSON files together via JSONP</description>
   <licenses>
