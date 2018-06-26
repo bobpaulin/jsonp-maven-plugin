@@ -34,7 +34,7 @@ The plugin configuration required will look like this
       <plugin>
         <groupId>com.bobpaulin.maven.jsonp</groupId>
         <artifactId>jsonp-maven-plugin</artifactId>
-        <version>0.0.2</version>
+        <version>0.0.3</version>
         <executions>
           <execution>
             <id>merge</id>
@@ -88,7 +88,7 @@ The plugin configuration required will look like this:
       <plugin>
         <groupId>com.bobpaulin.maven.jsonp</groupId>
         <artifactId>jsonp-maven-plugin</artifactId>
-        <version>0.0.2</version>
+        <version>0.0.3</version>
         <executions>
           <execution>
             <id>merge</id>
