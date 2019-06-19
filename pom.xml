@@ -129,6 +129,28 @@
           <tagNameFormat>v@{project.version}</tagNameFormat>
         </configuration>
       </plugin>
+      <plugin>
+        <groupId>org.apache.rat</groupId>
+        <artifactId>apache-rat-plugin</artifactId>
+        <version>0.13</version>
+        <configuration>
+          <excludes>
+            <exclude>README.md</exclude>
+            <exclude>src/it/override-it/src/main/resources/override.json</exclude>
+            <exclude>src/it/override-it/src/main/resources/source.json</exclude>
+            <exclude>src/it/patch-it/src/main/resources/patch.json</exclude>
+            <exclude>src/it/patch-it/src/main/resources/source.json</exclude>
+          </excludes>
+        </configuration>
+        <executions>
+          <execution>
+            <phase>verify</phase>
+            <goals>
+              <goal>check</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
     </plugins>
   </build>
   <profiles>
