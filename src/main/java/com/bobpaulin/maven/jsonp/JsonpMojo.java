@@ -60,6 +60,9 @@ public class JsonpMojo
     @Parameter( defaultValue = "${project.build.directory}/out.json", property = "outputFile", required = true )
     private File outputFile;
 
+    /**
+     * Executes JSONP Patch or Override
+     */
     public void execute()
         throws MojoExecutionException
     {
