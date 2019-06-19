@@ -19,7 +19,7 @@
   -->
   <groupId>com.bobpaulin.maven.jsonp</groupId>
   <artifactId>jsonp-maven-plugin</artifactId>
-  <version>0.0.6</version>
+  <version>0.0.7-SNAPSHOT</version>
   <packaging>maven-plugin</packaging>
 
   <name>jsonp-maven-plugin Maven Plugin</name>
@@ -73,7 +73,7 @@
     <connection>scm:git:https://github.com/bobpaulin/jsonp-maven-plugin.git</connection>
     <developerConnection>scm:git:https://github.com/bobpaulin/jsonp-maven-plugin.git</developerConnection>
     <url>https://github.com/bobpaulin/jsonp-maven-plugin</url>
-    <tag>v0.0.6</tag>
+    <tag>HEAD</tag>
   </scm>
   <build>
     <plugins>
